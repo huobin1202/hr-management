@@ -1,4 +1,6 @@
-# Hệ Thống Quản Lý Lương & Hồ Sơ Nhân Sự (HRMS)
+# Hệ Thống Quản Lý Lương & Hồ Sơ Nhân Sự
+
+## Đồ án môn CSDL Phân tán - Đề tài 1: Quản lý Lương & Hồ sơ Nhân sự
 
 ## Mô tả Dự án
 
@@ -206,4 +208,6 @@ try {
 
 ## Tác Giả
 
-Đồ án môn CSDL Phân tán - Đề tài 1: Quản lý Lương & Hồ sơ Nhân sự
+Hồ Phạm Hữu Bình x Github Copilot
+
+
