@@ -183,7 +183,7 @@ public class LuongPanel extends JPanel {
         
         btnTinhLuong = new JButton("💰 Tính lương tháng");
         btnTinhLuong.setBackground(new Color(40, 167, 69));
-        btnTinhLuong.setForeground(Color.WHITE);
+        btnTinhLuong.setForeground(Color.BLACK);
         btnTinhLuong.addActionListener(e -> tinhLuongThang());
         btnTinhLuong.setEnabled(SessionManager.getInstance().isAdmin());
         filterPanel.add(btnTinhLuong);
@@ -283,7 +283,7 @@ public class LuongPanel extends JPanel {
         
         JButton btnCapNhat = new JButton("💾 Cập nhật lương CB");
         btnCapNhat.setBackground(new Color(0, 123, 255));
-        btnCapNhat.setForeground(Color.WHITE);
+        btnCapNhat.setForeground(Color.BLACK);
         btnCapNhat.addActionListener(e -> capNhatLuongCoBan());
         btnCapNhat.setEnabled(SessionManager.getInstance().isAdmin());
         

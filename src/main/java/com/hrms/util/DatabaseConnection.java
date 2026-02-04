@@ -79,18 +79,45 @@ public class DatabaseConnection {
         String db1Server = properties.getProperty("db1.server", "localhost");
         String db1Port = properties.getProperty("db1.port", "1433");
         String db1Database = properties.getProperty("db1.database", "HR_INFO");
+        String db1Instance = properties.getProperty("db1.instance", "");
+        boolean db1IntegratedSecurity = Boolean.parseBoolean(properties.getProperty("db1.integratedSecurity", "false"));
         
         String db2Server = properties.getProperty("db2.server", "localhost");
         String db2Port = properties.getProperty("db2.port", "1433");
         String db2Database = properties.getProperty("db2.database", "HR_SALARY");
+        String db2Instance = properties.getProperty("db2.instance", "");
+        boolean db2IntegratedSecurity = Boolean.parseBoolean(properties.getProperty("db2.integratedSecurity", "false"));
         
-        db1Url = String.format("jdbc:sqlserver://%s:%s;databaseName=%s;encrypt=true;trustServerCertificate=true",
-                db1Server, db1Port, db1Database);
-        db2Url = String.format("jdbc:sqlserver://%s:%s;databaseName=%s;encrypt=true;trustServerCertificate=true",
-                db2Server, db2Port, db2Database);
+        // Xây dựng URL với instanceName parameter (không cần SQL Server Browser)
+        StringBuilder db1UrlBuilder = new StringBuilder("jdbc:sqlserver://");
+        db1UrlBuilder.append(db1Server).append(":").append(db1Port);
+        db1UrlBuilder.append(";databaseName=").append(db1Database);
+        if (db1Instance != null && !db1Instance.isEmpty()) {
+            db1UrlBuilder.append(";instanceName=").append(db1Instance);
+        }
+        if (db1IntegratedSecurity) {
+            db1UrlBuilder.append(";integratedSecurity=true");
+        }
+        db1UrlBuilder.append(";encrypt=true;trustServerCertificate=true");
+        db1Url = db1UrlBuilder.toString();
+        
+        StringBuilder db2UrlBuilder = new StringBuilder("jdbc:sqlserver://");
+        db2UrlBuilder.append(db2Server).append(":").append(db2Port);
+        db2UrlBuilder.append(";databaseName=").append(db2Database);
+        if (db2Instance != null && !db2Instance.isEmpty()) {
+            db2UrlBuilder.append(";instanceName=").append(db2Instance);
+        }
+        if (db2IntegratedSecurity) {
+            db2UrlBuilder.append(";integratedSecurity=true");
+        }
+        db2UrlBuilder.append(";encrypt=true;trustServerCertificate=true");
+        db2Url = db2UrlBuilder.toString();
         
         defaultUsername = properties.getProperty("db1.username");
         defaultPassword = properties.getProperty("db1.password");
+        
+        System.out.println("DB1 URL: " + db1Url);
+        System.out.println("DB2 URL: " + db2Url);
     }
     
     /**
@@ -121,6 +148,13 @@ public class DatabaseConnection {
      * Tất cả user đều có thể kết nối
      */
     public static Connection getDB1Connection() throws SQLException {
+        boolean integratedSecurity = Boolean.parseBoolean(properties.getProperty("db1.integratedSecurity", "false"));
+        
+        if (integratedSecurity) {
+            // Windows Authentication - không cần username/password
+            return DriverManager.getConnection(db1Url);
+        }
+        
         String username = currentUsername != null ? currentUsername : defaultUsername;
         String password = currentPassword != null ? currentPassword : defaultPassword;
         
@@ -141,6 +175,13 @@ public class DatabaseConnection {
     public static Connection getDB2Connection() throws SQLException {
         if (!canAccessDB2()) {
             throw new SQLException("Bạn không có quyền truy cập CSDL Lương thưởng!");
+        }
+        
+        boolean integratedSecurity = Boolean.parseBoolean(properties.getProperty("db2.integratedSecurity", "false"));
+        
+        if (integratedSecurity) {
+            // Windows Authentication - không cần username/password
+            return DriverManager.getConnection(db2Url);
         }
         
         String sqlLogin = mapRoleToSqlLogin(currentRole);
@@ -207,16 +248,32 @@ public class DatabaseConnection {
      */
     public static boolean testConnections() {
         boolean db1Ok = false, db2Ok = false;
+        boolean db1IntegratedSecurity = Boolean.parseBoolean(properties.getProperty("db1.integratedSecurity", "false"));
+        boolean db2IntegratedSecurity = Boolean.parseBoolean(properties.getProperty("db2.integratedSecurity", "false"));
         
-        try (Connection conn1 = DriverManager.getConnection(db1Url, defaultUsername, defaultPassword)) {
+        try {
+            Connection conn1;
+            if (db1IntegratedSecurity) {
+                conn1 = DriverManager.getConnection(db1Url);
+            } else {
+                conn1 = DriverManager.getConnection(db1Url, defaultUsername, defaultPassword);
+            }
             db1Ok = conn1 != null && !conn1.isClosed();
+            conn1.close();
             System.out.println("✓ Kết nối DB1 (HR_INFO) thành công");
         } catch (SQLException e) {
             System.err.println("✗ Lỗi kết nối DB1: " + e.getMessage());
         }
         
-        try (Connection conn2 = DriverManager.getConnection(db2Url, defaultUsername, defaultPassword)) {
+        try {
+            Connection conn2;
+            if (db2IntegratedSecurity) {
+                conn2 = DriverManager.getConnection(db2Url);
+            } else {
+                conn2 = DriverManager.getConnection(db2Url, defaultUsername, defaultPassword);
+            }
             db2Ok = conn2 != null && !conn2.isClosed();
+            conn2.close();
             System.out.println("✓ Kết nối DB2 (HR_SALARY) thành công");
         } catch (SQLException e) {
             System.err.println("✗ Lỗi kết nối DB2: " + e.getMessage());

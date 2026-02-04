@@ -138,7 +138,7 @@ public class PhanQuyenDemoPanel extends JPanel {
                 } else if (val.startsWith("❌")) {
                     c.setForeground(Color.RED);
                 } else {
-                    c.setForeground(Color.BLACK);
+                    c.setForeground(Color.WHITE);
                 }
                 
                 // Highlight current role
@@ -146,7 +146,7 @@ public class PhanQuyenDemoPanel extends JPanel {
                 if (table.getValueAt(row, 0).toString().equalsIgnoreCase(currentRole)) {
                     c.setBackground(new Color(255, 255, 200));
                 } else {
-                    c.setBackground(Color.WHITE);
+                    c.setBackground(Color.BLACK);
                 }
                 
                 return c;
@@ -197,7 +197,7 @@ public class PhanQuyenDemoPanel extends JPanel {
         JPanel distPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JButton btnTestDistributed = new JButton("🔗 Test giao dịch phân tán");
         btnTestDistributed.setBackground(new Color(138, 43, 226));
-        btnTestDistributed.setForeground(Color.WHITE);
+        btnTestDistributed.setForeground(Color.BLACK);
         btnTestDistributed.addActionListener(e -> testDistributedTransaction());
         distPanel.add(btnTestDistributed);
         

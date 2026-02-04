@@ -56,7 +56,7 @@ public class LoginFrame extends JFrame {
         titlePanel.setOpaque(false);
         JLabel lblTitle = new JLabel("HỆ THỐNG QUẢN LÝ LƯƠNG & NHÂN SỰ");
         lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        lblTitle.setForeground(Color.WHITE);
+        lblTitle.setForeground(Color.BLACK);
         titlePanel.add(lblTitle);
         
         JLabel lblSubtitle = new JLabel("Phân mảnh dọc CSDL - Đồ án môn học");
@@ -82,7 +82,7 @@ public class LoginFrame extends JFrame {
         
         // Username
         JLabel lblUsername = new JLabel("Tên đăng nhập:");
-        lblUsername.setForeground(Color.WHITE);
+        lblUsername.setForeground(Color.BLACK);
         lblUsername.setFont(new Font("Segoe UI", Font.BOLD, 13));
         gbc.gridx = 0; gbc.gridy = 0;
         gbc.weightx = 0;
@@ -102,7 +102,7 @@ public class LoginFrame extends JFrame {
         
         // Password
         JLabel lblPassword = new JLabel("Mật khẩu:");
-        lblPassword.setForeground(Color.WHITE);
+        lblPassword.setForeground(Color.BLACK);
         lblPassword.setFont(new Font("Segoe UI", Font.BOLD, 13));
         gbc.gridx = 0; gbc.gridy = 1;
         gbc.weightx = 0;
@@ -128,7 +128,7 @@ public class LoginFrame extends JFrame {
         btnLogin.setFont(new Font("Segoe UI", Font.BOLD, 13));
         btnLogin.setPreferredSize(new Dimension(120, 35));
         btnLogin.setBackground(new Color(40, 167, 69));
-        btnLogin.setForeground(Color.WHITE);
+        btnLogin.setForeground(Color.BLACK);
         btnLogin.setFocusPainted(false);
         btnLogin.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
@@ -136,7 +136,7 @@ public class LoginFrame extends JFrame {
         btnExit.setFont(new Font("Segoe UI", Font.BOLD, 13));
         btnExit.setPreferredSize(new Dimension(120, 35));
         btnExit.setBackground(new Color(220, 53, 69));
-        btnExit.setForeground(Color.WHITE);
+        btnExit.setForeground(Color.BLACK);
         btnExit.setFocusPainted(false);
         btnExit.setCursor(new Cursor(Cursor.HAND_CURSOR));
         

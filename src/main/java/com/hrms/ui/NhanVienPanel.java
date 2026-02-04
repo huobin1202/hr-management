@@ -136,7 +136,7 @@ public class NhanVienPanel extends JPanel {
         
         btnAdd = new JButton("➕ Thêm mới");
         btnAdd.setBackground(new Color(40, 167, 69));
-        btnAdd.setForeground(Color.WHITE);
+        btnAdd.setForeground(Color.BLACK);
         btnAdd.addActionListener(e -> addNhanVien());
         
         btnEdit = new JButton("✏️ Sửa");
@@ -145,7 +145,7 @@ public class NhanVienPanel extends JPanel {
         
         btnDelete = new JButton("🗑️ Xóa");
         btnDelete.setBackground(new Color(220, 53, 69));
-        btnDelete.setForeground(Color.WHITE);
+        btnDelete.setForeground(Color.BLACK);
         btnDelete.addActionListener(e -> deleteNhanVien());
         
         // Chỉ Admin mới có quyền thêm/xóa
@@ -255,7 +255,7 @@ public class NhanVienPanel extends JPanel {
         
         JButton btnSave = new JButton("💾 Lưu");
         btnSave.setBackground(new Color(0, 123, 255));
-        btnSave.setForeground(Color.WHITE);
+        btnSave.setForeground(Color.BLACK);
         btnSave.addActionListener(e -> saveNhanVien());
         
         JButton btnClear = new JButton("🧹 Xóa form");

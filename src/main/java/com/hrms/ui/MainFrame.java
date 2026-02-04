@@ -155,7 +155,7 @@ public class MainFrame extends JFrame {
         // Title
         JLabel lblTitle = new JLabel("🏢 HỆ THỐNG QUẢN LÝ LƯƠNG & HỒ SƠ NHÂN SỰ");
         lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        lblTitle.setForeground(Color.WHITE);
+        lblTitle.setForeground(Color.BLACK);
         
         // User Info Panel
         JPanel userPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
@@ -164,7 +164,7 @@ public class MainFrame extends JFrame {
         String roleIcon = getRoleIcon(currentUser.getVaiTro());
         lblUserInfo = new JLabel(roleIcon + " " + currentUser.getTenDangNhap());
         lblUserInfo.setFont(new Font("Segoe UI", Font.BOLD, 13));
-        lblUserInfo.setForeground(Color.WHITE);
+        lblUserInfo.setForeground(Color.BLACK);
         
         lblRole = new JLabel("(" + currentUser.getTenVaiTro() + ")");
         lblRole.setFont(new Font("Segoe UI", Font.ITALIC, 12));
