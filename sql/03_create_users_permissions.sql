@@ -1,3 +1,19 @@
+
+-- 1. Tạo LOGIN (quan trọng nhất)
+CREATE LOGIN admin_login 
+WITH PASSWORD = 'Admin@123456';
+
+-- 2. DB HR_INFO
+USE HR_INFO;
+GO
+CREATE USER admin_login FOR LOGIN admin_login;
+ALTER ROLE db_owner ADD MEMBER admin_login;
+
+-- 3. DB HR_SALARY
+USE HR_SALARY;
+GO
+CREATE USER admin_login FOR LOGIN admin_login;
+ALTER ROLE db_owner ADD MEMBER admin_login;
 -- ============================================
 -- SCRIPT TẠO USER VÀ PHÂN QUYỀN
 -- Demo phân quyền truy cập giữa các CSDL

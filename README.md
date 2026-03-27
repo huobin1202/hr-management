@@ -52,7 +52,25 @@ sql/01_create_db1_hrinfo.sql
 # 2. Tạo database HR_SALARY (DB2)
 sql/02_create_db2_salary.sql
 
+Note:Tạo login và user trước mới thêm procedures được
+
+```sql
+-- 1. tạo login
+CREATE LOGIN admin_login WITH PASSWORD = 'Admin@123456';
+
+-- 2. tạo user
+USE HR_INFO;
+CREATE USER admin_login FOR LOGIN admin_login;
+ALTER ROLE db_owner ADD MEMBER admin_login;
+
+USE HR_SALARY;
+CREATE USER admin_login FOR LOGIN admin_login;
+ALTER ROLE db_owner ADD MEMBER admin_login;
+
+```
+
 # 3. Tạo users và phân quyền
+
 sql/03_create_users_permissions.sql
 
 # 4. Tạo stored procedures cho giao dịch phân tán
