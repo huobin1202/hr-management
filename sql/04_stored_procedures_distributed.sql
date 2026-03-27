@@ -1,3 +1,4 @@
+
 -- ============================================
 -- STORED PROCEDURES CHO THAO TÁC PHÂN TÁN
 -- Đảm bảo tính toàn vẹn dữ liệu giữa 2 CSDL
@@ -296,3 +297,8 @@ GO
 
 PRINT N'=== Đã tạo Stored Procedures cho thao tác phân tán ===';
 GO
+USE HR_INFO;
+GO
+SELECT name, type_desc
+FROM sys.database_principals
+WHERE name = 'admin_user';
